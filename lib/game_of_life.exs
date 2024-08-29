@@ -4,11 +4,11 @@ Code.require_file("lib/game/game.ex")
 
 defmodule GameOfLife do
   def run do
-    screen = %Tui.Screen{width: 40, height: 20, mode: :mono}
+    screen = %Tui.Screen{width: 15, height: 15, mode: :mono}
 
     {:ok, _pid} = GlobalState.start_link(screen)
 
-    buffer = Tui.create_buffer()
+    buffer = Game.toggle_alive(Tui.create_buffer(), [{3, 2}, {2, 9}], "#")
 
     # intro msg and socials
 

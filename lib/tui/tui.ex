@@ -1,6 +1,6 @@
 defmodule Tui do
   defmodule Screen do
-    defstruct width: 20, height: 20, mode: :mono
+    defstruct width: 10, height: 10, mode: :mono
   end
 
   def display(buffer) do
@@ -14,7 +14,8 @@ defmodule Tui do
   defp print_buffer([], _count), do: :ok
 
   defp print_buffer([head | tail], count) do
-    IO.write("#{head}")
+    # if cursor replace spaces with []
+    IO.write(" #{head} ")
 
     if rem(count + 1, GlobalState.get().width) == 0 do
       IO.puts("")
