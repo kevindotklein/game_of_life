@@ -1,5 +1,17 @@
 defmodule GameOfLife do
-  def test do
-    Tui.display(%Tui.Screen{})
+  def run do
+    screen = %Tui.Screen{width: 20, height: 20, mode: :mono}
+
+    :timer.send_interval(1000, self(), :tick)
+
+    loop(screen)
+  end
+
+  defp loop(%Tui.Screen{} = screen) do
+    receive do
+      :tick ->
+        Tui.display(screen)
+        loop(screen)
+    end
   end
 end
