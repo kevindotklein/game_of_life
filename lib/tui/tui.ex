@@ -5,7 +5,7 @@ defmodule Tui do
 
   def display(buffer) do
     clear_screen()
-    print_buffer(put_char(buffer, 2, 2, "A"), 0)
+    print_buffer(buffer, 0)
   end
 
   def create_buffer(),
@@ -21,11 +21,6 @@ defmodule Tui do
     end
 
     print_buffer(tail, count + 1)
-  end
-
-  def put_char(buffer, x, y, char) do
-    buffer
-    |> List.replace_at(GlobalState.get().width * y + x, char)
   end
 
   defp clear_screen do

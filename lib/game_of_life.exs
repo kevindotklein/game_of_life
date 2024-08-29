@@ -21,7 +21,7 @@ defmodule GameOfLife do
     receive do
       :tick ->
         Tui.display(buffer)
-        loop(buffer)
+        loop(Game.toggle_alive(buffer, [{2, 2}], "#"))
     end
   end
 end
