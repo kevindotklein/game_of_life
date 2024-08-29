@@ -1,3 +1,5 @@
+Code.require_file("lib/tui/tui.ex")
+
 defmodule GameOfLife do
   def run do
     screen = %Tui.Screen{width: 20, height: 20, mode: :mono}
@@ -15,3 +17,5 @@ defmodule GameOfLife do
     end
   end
 end
+
+GameOfLife.run()

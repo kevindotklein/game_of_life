@@ -4,10 +4,17 @@ defmodule GameOfLife.MixProject do
   def project do
     [
       app: :game_of_life,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.16",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      releases: [
+        game_of_life: [
+          applications: [game_of_life: :permanent],
+          include_executables_for: [:win32],
+          steps: [:assemble, :tar]
+        ]
+      ]
     ]
   end
 
