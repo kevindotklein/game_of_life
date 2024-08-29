@@ -1,19 +1,27 @@
+Code.require_file("lib/global/global_state.ex")
 Code.require_file("lib/tui/tui.ex")
+Code.require_file("lib/game/game.ex")
 
 defmodule GameOfLife do
   def run do
-    screen = %Tui.Screen{width: 20, height: 20, mode: :mono}
+    screen = %Tui.Screen{width: 40, height: 20, mode: :mono}
 
-    :timer.send_interval(1000, self(), :tick)
+    {:ok, _pid} = GlobalState.start_link(screen)
 
-    loop(screen)
+    buffer = Tui.create_buffer()
+
+    # intro msg and socials
+
+    :timer.send_interval(750, self(), :tick)
+
+    loop(buffer)
   end
 
-  defp loop(%Tui.Screen{} = screen) do
+  defp loop(buffer) do
     receive do
       :tick ->
-        Tui.display(screen)
-        loop(screen)
+        Tui.display(buffer)
+        loop(buffer)
     end
   end
 end
